@@ -1,0 +1,29 @@
+{
+  "name": "project-library-be",
+  "version": "1.0.0",
+  "description": "Este proyecto esta destnado para el desarrollo backend del proyecto libreria del ciclo 3 de MinTic",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfbarahonag-mintic/project-library-be.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jfbarahonag-mintic/project-library-be/issues"
+  },
+  "homepage": "https://github.com/jfbarahonag-mintic/project-library-be#readme",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1"
+  }
+}
