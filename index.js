@@ -29,6 +29,24 @@ app.get('/books', (req, res) => {
 	]);
 })
 
+app.get('/books/:id', (req, res) => {
+	const { id } = req.params;
+	res.json({
+		id,
+		title: 'Akelarre',
+		author: 'Mario Mendoza',
+		price: 20000
+	})
+})
+
+app.get('/categories/:categoryId/books/:bookId', (req, res) => {
+	const { categoryId, bookId } = req.params
+	res.json({
+		categoryId,
+		bookId
+	})
+})
+
 app.listen(port, () => {
 	console.log(`server listening at ${port}`);
 });
