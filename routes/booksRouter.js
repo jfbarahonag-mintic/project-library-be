@@ -6,20 +6,17 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	const { limit } = req.query
 
-	if (limit) {
-		const books = []
-		for (let index = 0; index < limit; index++) {
-			books.push({
-				title: faker.commerce.productName(),
-				price: parseInt(faker.commerce.price(), 10),
-				image: faker.image.imageUrl(),
-			})
-		}
-		res.json(books);
-	}
-	else {
-		res.status(400).send('Missing Limit param')
-	}
+  const size = limit || 5
+  
+  const books = []
+  for (let index = 0; index < size; index++) {
+    books.push({
+      title: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price(), 10),
+      image: faker.image.imageUrl(),
+    })
+  }
+  res.json(books);
 })
 
 /* static definitions must go first of dynamic(:xx) definitions */
