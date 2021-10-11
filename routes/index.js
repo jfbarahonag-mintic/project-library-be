@@ -5,7 +5,7 @@ const usersRouter = require('./usersRouter')
 const router = express.Router();
 
 function routerApi(app) {
-  app.use('/api', router)
+  app.use('/api/v1', router)
   router.use('/books', booksRouter)
   router.use('/users', usersRouter)
 }
