@@ -42,4 +42,24 @@ router.post('/', (req, res) => {
   })
 })
 
+router.patch('/:id', (req, res) => {
+  const { id } = req.params
+  const { body } = req
+
+  res.json({
+    message: 'updated',
+    data: body,
+    id,
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params
+  
+  res.json({
+    message: 'deleted',
+    id,
+  })
+})
+
 module.exports = router
