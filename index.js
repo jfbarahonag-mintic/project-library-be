@@ -1,4 +1,5 @@
 const express = require('express');
+const faker = require('faker');
 
 const app = express();
 const port = 3000;
@@ -8,25 +9,22 @@ app.get('/', (req, res) => {
 })
 
 app.get('/books', (req, res) => {
-	res.json([{
-			ISBN: '1',
-			title: 'Sherlock Holmes',
-			author: 'Arthur Conan Doyle',
-			price: 10000
-		},
-		{
-			ISBN: '2',
-			title: 'El olvido que seremos',
-			author: 'Hector Abad',
-			price: 20000
-		},
-		{
-			ISBN: '3',
-			title: 'Akelarre',
-			author: 'Mario Mendoza',
-			price: 20000
-		},
-	]);
+	const { limit } = req.query
+
+	if (limit) {
+		const books = []
+		for (let index = 0; index < limit; index++) {
+			books.push({
+				title: faker.commerce.productName(),
+				price: parseInt(faker.commerce.price(), 10),
+				image: faker.image.imageUrl(),
+			})
+		}
+		res.json(books);
+	}
+	else {
+		res.status(400).send('Missing Limit param')
+	}
 })
 
 app.get('/books/:id', (req, res) => {
