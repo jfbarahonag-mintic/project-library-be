@@ -47,6 +47,20 @@ app.get('/categories/:categoryId/books/:bookId', (req, res) => {
 	})
 })
 
+app.get('/users', (req, res) => {
+	const { email, pswd } = req.query
+
+	/* validating query params */
+	if (email && pswd) {
+		res.json({
+			email,
+			pswd
+		})
+	} else {
+		res.send('Error validating params')
+	}
+})
+
 app.listen(port, () => {
 	console.log(`server listening at ${port}`);
 });
