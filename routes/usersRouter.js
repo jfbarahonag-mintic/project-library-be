@@ -50,14 +50,17 @@ router.patch('/new-pswd', (req, res) => {
       status: "updated"
     })
   } else if (rc === 1) {
+    res.status(400).json({
+      status: "New password is equal to old password"
+    })
+  } else if (rc === 2) {
     res.status(401).json({
       status: "Password mismatch"
     })
-  } else if (rc === 2) {
+  } else if (rc === 3) {
     res.status(404).json({
       status: "Email Not found"
     })
-
   }
 })
 

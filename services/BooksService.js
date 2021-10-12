@@ -19,8 +19,14 @@ class BooksService {
     }
   }
 
-  create() {
+  create(data) {
+    const newBook = {
+      id: faker.datatype.uuid(),
+      ...data
+    }
 
+    this.books.push(newBook)
+    return newBook
   }
 
   find() {
@@ -31,12 +37,31 @@ class BooksService {
     return this.books.find(item => item.id === id)
   }
 
-  update() {
+  update(id, changes) {
+    const idx = this.books.findIndex(book => book.id === id)
 
+    if (idx === -1) {
+      throw new Error('Book not found')
+    }
+    const book = this.books[idx]
+    this.books[idx] = {
+      ...book, //persist the attributes of the book
+      ...changes //apply all new changes
+    }
+    return this.books[idx]
   }
 
-  delete() {
+  delete(id) {
+    const idx = this.books.findIndex(book => book.id === id)
 
+    if (idx === -1) {
+      throw new Error('Book not found')
+    }
+    this.books.splice(idx, 1)
+
+    return {
+      id
+    }
   }
 }
 

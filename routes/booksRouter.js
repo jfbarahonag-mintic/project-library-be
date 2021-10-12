@@ -25,30 +25,21 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const { body } = req
-  res.status(201).json({
-    message: 'created',
-    data: body
-  })
+  const newBook = service.create(body)
+  res.status(201).json(newBook)
 })
 
 router.patch('/:id', (req, res) => {
   const { id } = req.params
   const { body } = req
-
-  res.json({
-    message: 'updated',
-    data: body,
-    id,
-  })
+  const book = service.update(id, body)
+  res.json(book)
 })
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params
-  
-  res.json({
-    message: 'deleted',
-    id,
-  })
+  const response = service.delete(id)
+  res.json(response)
 })
 
 module.exports = router

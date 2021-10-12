@@ -55,12 +55,18 @@ class UsersService {
         if (user.email.localeCompare(email) === 0) {
           // password match
           if (user.pswd.localeCompare(oldPswd) === 0) {
-            // updated
-            user.pswd = newPswd
-            rc = 0
+            // new and old passwords are not the same
+            if (oldPswd.localeCompare(newPswd) !== 0) {
+              // updated
+              user.pswd = newPswd
+              rc = 0
+            } else {
+              // there's no change with the new password
+              rc = 1
+            }
           } else {
             // mismatch password
-            rc = 1
+            rc = 2
           }
           return
         }
@@ -68,7 +74,7 @@ class UsersService {
       return rc
     } else {
       // email not found in list
-      return 2
+      return 3
     }
   }
 }
