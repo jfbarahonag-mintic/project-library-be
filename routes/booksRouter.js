@@ -1,22 +1,14 @@
 const express = require('express');
-const faker = require('faker');
+
+const BooksService = require('../services/BooksService')
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	const { limit } = req.query
+const service = new BooksService();
 
-  const size = limit || 5
-  
-  const books = []
-  for (let index = 0; index < size; index++) {
-    books.push({
-      title: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl(),
-    })
-  }
-  res.json(books);
+router.get('/', (req, res) => {
+  const books = service.find();
+  res.json(books)
 })
 
 /* static definitions must go first of dynamic(:xx) definitions */
@@ -26,20 +18,9 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
+  const book = service.findOne(id)
   
-  if (id === '999') {
-    res.status(404).json({
-      message: 'not found'
-    })
-  } else {
-    res.status(200).json({
-      id,
-      title: 'Akelarre',
-      author: 'Mario Mendoza',
-      price: 20000
-    })
-  }
-
+  res.json(book)
 })
 
 router.post('/', (req, res) => {
