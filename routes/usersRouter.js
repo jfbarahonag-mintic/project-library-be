@@ -65,4 +65,17 @@ router.patch('/new-pswd', (req, res) => {
   }
 })
 
+router.post('/register', async (req, res) => {
+  const { body } = req
+  console.log(body);
+  try {
+    const userDB = await User.create(body)
+    res.status(200).json(userDB)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Some error occurred', error
+    })
+  }
+})
+
 module.exports = router;
