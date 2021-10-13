@@ -1,9 +1,13 @@
 const faker = require('faker');
+//db
+const User = require('../models/user')
 
 class UsersService {
   constructor() {
     this.users = []
+    this.usersDB = []
     this.generate()
+    //TODO: Call the db data
   }
 
   generate() {
@@ -26,6 +30,19 @@ class UsersService {
     }
 
     return false
+  }
+
+  async registerUser(data) {
+    const userDB = await User.find({ email: data.email })
+
+    if (Object.keys(userDB).length === 0 /* empty object */) { // is not already registered in the DB
+      const newUser = await User.create(data)
+      return newUser
+    }
+    //already registered
+    return {
+      message: 'User already registered'
+    }
   }
 
   verifyLogin(email, pswd) {
