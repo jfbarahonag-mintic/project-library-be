@@ -45,6 +45,23 @@ class UsersService {
     }
   }
 
+  async loginUser(data) {
+    const userDB = await User.find({ email: data.email, pswd: data.pswd })
+
+    if (Object.keys(userDB).length === 0 /* empty object */) {
+      return {
+        status: 'not logged',
+        data
+      }
+    
+    }
+
+    return {
+    status: 'logged in',
+    data
+    }
+  }
+
   verifyLogin(email, pswd) {
     if (this.findOne(email)) {
       this.users.forEach(user => {

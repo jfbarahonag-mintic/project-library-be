@@ -77,4 +77,16 @@ router.post('/register', async (req, res) => {
   }
 })
 
+router.post('/login', async (req, res) => {
+  const { body } = req
+  try {
+    const userDB = await service.loginUser(body)
+    res.status(200).json(userDB)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Some error occurred', error
+    })
+  }
+})
+
 module.exports = router;
