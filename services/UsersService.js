@@ -58,7 +58,7 @@ class UsersService {
 
     return {
     status: 'logged in',
-    data
+    userDB
     }
   }
 
