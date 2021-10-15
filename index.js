@@ -7,14 +7,15 @@ const history = require('connect-history-api-fallback')
 const mongoose = require('mongoose');
 
 //DB CONNECTION
-const DB_URI = 'mongodb://localhost:27017/library'
+// const DB_URI = 'mongodb://localhost:27017/library'
+const DB_URI = 'mongodb+srv://felipebg:4tFLWh52UMq45JQ8@library.crmm5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const options = {
   useNewUrlParser: true,
   UseUnifiedTopology: true,
 }
 
 async function connect() {
-  await mongoose.connect(DB_URI, options)
+  await mongoose.connect(DB_URI/*, options*/)
   console.log('Connected to DB successfully');
 }
 
