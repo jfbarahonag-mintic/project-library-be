@@ -66,6 +66,32 @@ class UsersService {
     }
   }
 
+  async editUser(data) {
+
+    try {
+      const userDB = await User.find({ email: data.email })
+      if (Object.keys(userDB).length === 0 /* empty object */) {
+        return {
+          status: 'not registered',
+          userDB
+        }
+      }
+
+      const user = userDB[0]
+      await User.findByIdAndUpdate(user._id, data)
+
+      return {
+        status: 'updated',
+        data
+      }
+
+    }catch(e) {
+      return {
+        status: 'error'
+      }
+    }
+  }
+
   verifyLogin(email, pswd) {
     if (this.findOne(email)) {
       this.users.forEach(user => {

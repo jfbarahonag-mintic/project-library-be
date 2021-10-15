@@ -89,4 +89,14 @@ router.post('/login', async (req, res) => {
   }
 })
 
+router.patch('/edit', async (req, res) => {
+  const { body } = req
+  try {
+    const userDB = await service.editUser(body)
+    res.status(200).json(userDB)
+  } catch (error) {
+    
+  }
+})
+
 module.exports = router;
