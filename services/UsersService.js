@@ -37,11 +37,15 @@ class UsersService {
 
     if (Object.keys(userDB).length === 0 /* empty object */) { // is not already registered in the DB
       const newUser = await User.create(data)
-      return newUser
+      return {
+        status: 'registered',
+        newUser
+      }
     }
     //already registered
     return {
-      message: 'User already registered'
+      status: 'already registered',
+      data
     }
   }
 
