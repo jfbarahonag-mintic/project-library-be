@@ -32,13 +32,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(morgan('tiny'))
 app.use(history())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
 	res.send('Hello, world!');
 })
 
 app.listen(port, () => {
-	console.log(`server listening at ${port}`);
+  console.log(`server listening at ${port}`);
 });
 
 routerApi(app)
